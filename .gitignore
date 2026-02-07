@@ -2,6 +2,9 @@
 venv/
 .env
 
+#logs
+logs/
+
 # 2. Python compiled files (Generated)
 __pycache__/
 *.py[cod]

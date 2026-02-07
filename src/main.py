@@ -1,9 +1,11 @@
+import time
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import joblib
 import os
 import pandas as pd
 import json
+from src.logger import log_prediction
 
 #---Configuration---
 MODEL_PATH = 'models/churn_model_v1.pkl'
@@ -52,6 +54,7 @@ def get_model_info():
 
 @app.post("/predict")
 def predict(data: CustomerData):
+    start_time = time.time() 
     if not model:
         raise HTTPException(status_code=503, detail="Model not loaded")
     
@@ -62,6 +65,10 @@ def predict(data: CustomerData):
         prediction = model.predict(input_df)[0]
         probability = model.predict_proba(input_df)[0].tolist()
         
+        end_time = time.time()
+        latency = end_time - start_time
+        #log the prediction event
+        log_prediction(input_df, prediction, probability=probability[1], latency=latency)  
         return {
             "churn_prediction": int(prediction),
             "churn_probability": probability[1],

@@ -1,0 +1,12 @@
+{
+    "version": "1.0",
+    "algorithm": "RandomForestClassifier",
+    "accuracy": 1.0,
+    "trained_at": 1770486360.0709748,
+    "features": [
+        "CreditScore",
+        "Age",
+        "Balance",
+        "Tenure"
+    ]
+}

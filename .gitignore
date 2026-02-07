@@ -1,3 +1,24 @@
+# 1. Virtual Environment (Local only)
 venv/
-*.env
+.env
+
+# 2. Python compiled files (Generated)
 __pycache__/
+*.py[cod]
+
+# 3. OS generated files
+.DS_Store
+
+# 4. Large Data (Optional - usually data stays local or in S3)
+#data/
+
+# 5. IDE settings
+.vscode/
+.idea/
+
+# --- IMPORTANT DECISION ---
+# 6. Models
+# If model is small (<50MB), push it.
+# If it is large (>100MB), GitHub will block it.
+# For this project, the churn model is tiny, so keep it.
+# models/*.pkl
